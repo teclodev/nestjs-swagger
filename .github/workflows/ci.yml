@@ -1,6 +1,6 @@
-name: CICD
+name: CD
 
-on: [push]
+on: [pull_request]
 
 jobs:
   build:
@@ -15,7 +15,13 @@ jobs:
         with:
           node-version: 18
           cache: "pnpm"
-      - name: Install dependencies
+      - name: Install lib dependencies
         run: pnpm install
       - name: Test
         run: pnpm test
+      - name: Install example dependencies
+        working-directory: example
+        run: pnpm install
+      - name: Test Example
+        working-directory: example
+        run: pnpm test:e2e
