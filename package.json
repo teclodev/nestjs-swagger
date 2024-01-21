@@ -21,7 +21,8 @@
     "prebuild": "rimraf dist",
     "paths": "node -r tsconfig-paths/register dist/index.js",
     "build": "tsc -p tsconfig.build.json",
-    "postbuild": "cp -r src/public dist/public"
+    "postbuild": "cp -r src/public dist/public",
+    "release": "release-it"
   },
   "dependencies": {
     "@nestjs/common": "^10.3.0",
@@ -38,6 +39,7 @@
     "jest": "^29.7.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.2.4",
+    "release-it": "^17.0.1",
     "rimraf": "^5.0.5",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.2",
