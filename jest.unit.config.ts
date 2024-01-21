@@ -7,8 +7,8 @@ const jestConfig: JestConfigWithTsJest = {
   testEnvironment: "node",
   modulePaths: [compilerOptions.baseUrl],
   moduleNameMapper: {
-    "^@/(.*)$": "<rootDir>/src/$1",
-  },
+    "^@/(.*)$": "<rootDir>/src/$1"
+  }
 }
 
 export default jestConfig

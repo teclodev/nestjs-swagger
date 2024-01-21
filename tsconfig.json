@@ -13,9 +13,9 @@
     "baseUrl": ".",
     "noLib": false,
     "paths": {
-      "@/*": ["src/*", "src/index.ts"],
-    },
+      "@/*": ["src/*", "src/index.ts"]
+    }
   },
   "include": ["src", "test"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules"]
 }
