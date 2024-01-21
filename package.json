@@ -1,0 +1,11 @@
+{
+  "name": "@teclo/nestjs-swagger-ui",
+  "version": "0.1.0",
+  "description": "An optimized NestJS swagger module for rendering Swagger UI",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "brendangoldberg",
+  "license": "MIT"
+}
