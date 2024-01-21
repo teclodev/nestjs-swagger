@@ -1,0 +1,30 @@
+name: CD
+
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "pnpm"
+      - name: Install lib dependencies
+        run: pnpm install
+      - name: Test
+        run: pnpm test
+      - name: Install example dependencies
+        working-directory: example
+        run: pnpm install
+      - name: Test Example
+        working-directory: example
+        run: pnpm test:e2e
