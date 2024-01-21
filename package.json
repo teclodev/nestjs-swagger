@@ -10,20 +10,28 @@
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "jest --selectProjects unit",
     "format": "prettier . --write",
     "lint": "eslint . --fix",
     "tidy": "run-s format lint",
     "prebuild": "rimraf dist",
-    "build": "tsc -p tsconfig.build.json"
+    "paths": "node -r tsconfig-paths/register dist/index.js",
+    "build": "tsc -p tsconfig.build.json",
+    "postbuild": "cp -r src/public dist/public"
   },
   "dependencies": {
+    "@nestjs/common": "^10.3.0",
     "@nestjs/swagger": "^7.2.0",
+    "js-yaml": "^4.1.0",
     "swagger-ui-dist": "^5.11.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.11",
+    "@types/js-yaml": "^4.0.9",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
     "@typescript-eslint/parser": "^6.19.0",
     "eslint": "^8.56.0",
@@ -33,6 +41,7 @@
     "rimraf": "^5.0.5",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.3.3"
   }
 }

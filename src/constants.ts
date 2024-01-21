@@ -1,11 +1,35 @@
-// noinspection JSUnresolvedReference
-export const html = `
+import { SwaggerCustomOptions } from "@nestjs/swagger"
+
+export const defaultSwaggerCustomOptions: SwaggerCustomOptions = {
+  useGlobalPrefix: false,
+  explorer: false,
+  customCss: "",
+  customCssUrl: "",
+  customJs: "",
+  customJsStr: "",
+  customfavIcon: "",
+  customSwaggerUiPath: "",
+  swaggerUrl: "",
+  customSiteTitle: "Swagger UI",
+  validatorUrl: "",
+  jsonDocumentUrl: "",
+  yamlDocumentUrl: "",
+  patchDocumentOnRequest: (req, res, doc) => doc
+}
+
+export const favIconHtml = `
+  <link rel="icon" type="image/png" href="{{path}}/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="{{path}}/favicon-16x16.png" sizes="16x16" />
+`
+
+export const htmlTemplate = `
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/{{swaggerUiVersion}}/swagger-ui.css" />
   <title>{{title}}</title>
+  {{favIconStr}}
   <style>
       html
       {
@@ -62,42 +86,34 @@ export const html = `
 
 <script>
 window.onload = function() {
+  {{swaggerOptions}}
+  {{customOptions}}
+    
   let url
-  if (options.swaggerUrl) {
-    url = options.swaggerUrl
+  if (customOptions.swaggerUrl) {
+    url = customOptions.swaggerUrl
   } else {
-    url = window.location.search.match(/url=([^&]+)/);
+    url = window.location.search.match(/url=([^&]+)/)
     if (url && url.length > 1) {
-      url = decodeURIComponent(url[1]);
+      url = decodeURIComponent(url[1])
     } else {
-      url = window.location.origin;
+      url = window.location.origin
     }
   }
-  
-  {{options}}
-  
-  const { swaggerDoc } = options
-  
-  const swaggerOptions = {
-    spec: swaggerDoc,
-    url: url,
-    dom_id: "#swagger-ui",
-    deepLinking: true,
-    presets: [
-      SwaggerUIBundle.presets.apis,
-      SwaggerUIStandalonePreset
-    ],
-    plugins: [
-      SwaggerUIBundle.plugins.DownloadUrl
-    ],
-    layout: "StandaloneLayout"
-  }
-  
-  const ui = SwaggerUIBundle(swaggerOptions)
 
-  window.ui = ui
+  window.ui = SwaggerUIBundle({
+    ...swaggerOptions,
+    url: url
+  })
 }
 </script>
+{{customJs}}
+{{customJsStr}}
+{{customCssUrl}}
+<style>
+  {{customCss}}
+  {{explorerCss}}
+</style>
 </body>
 
 </html>
